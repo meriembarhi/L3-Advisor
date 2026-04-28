@@ -128,7 +128,7 @@ def _chat(api_key: str, protocol: str, messages: list[dict]) -> str:
 # ---------------------------------------------------------------------------
 def _build_audit_log(messages: list[dict], protocol: str) -> str:
     """Build a formatted Incident Audit Log from the chat history."""
-    timestamp = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
+    timestamp = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
     lines: list[str] = [
         "=" * 70,
         "           L3-ADVISOR — INCIDENT AUDIT LOG",
@@ -220,7 +220,7 @@ def _render_sidebar() -> None:
             st.download_button(
                 label="📥 Download Incident Audit Log",
                 data=audit_log,
-                file_name=f"l3_advisor_audit_{datetime.datetime.utcnow().strftime('%Y%m%d_%H%M%S')}.txt",
+                file_name=f"l3_advisor_audit_{datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%d_%H%M%S')}.txt",
                 mime="text/plain",
                 use_container_width=True,
             )
